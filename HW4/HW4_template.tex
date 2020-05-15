@@ -1,0 +1,602 @@
+\newif\ifmoment
+%\momenttrue
+\newif\iflong
+\longtrue
+\newif\ifNIPS
+%\NIPStrue
+\newif\ifShowDeprecated
+%\ShowDeprecatedtrue
+\newif\ifNotForSubmission
+\NotForSubmissiontrue
+%\documentclass[11pt]{article}
+
+
+\ifNIPS
+\documentclass{article}
+
+\PassOptionsToPackage{numbers,sort,compress}{natbib}
+\usepackage{neurips_2019}
+
+\usepackage[format=hang,font={footnotesize}]{caption}
+\else
+\documentclass[11pt,letterpaper]{article}
+\usepackage[papersize={8.5in,11in},margin=1in]{geometry}
+\usepackage[numbers,sort,compress]{natbib} % flexible bibliography support
+\usepackage[format=hang,font={footnotesize}]{caption}
+\fi
+\usepackage[title]{appendix}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{algorithmic}
+\usepackage{subfigure}
+\usepackage{wrapfig}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+
+\usepackage{graphicx}
+
+\usepackage{complexity}
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{setspace}
+
+
+
+\usepackage{tcolorbox}
+
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{color}
+
+\usepackage{algorithm,algorithmic} % pseudocode support
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\renewcommand\algorithmiccomment[1]{ \hfill $\diamond$ \ {\footnotesize \em #1} }
+
+\usepackage{xspace}
+\usepackage{dsfont} % to allow mathds (mathbb)
+\usepackage{pifont} % to allow circled numbers
+\usepackage{bbm}
+\usepackage{comment}
+\usepackage{parskip}
+
+
+
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{stheorem}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+\newtheorem{innercustomlemma}{Lemma}
+\newenvironment{slemma}[1]
+  {\renewcommand\theinnercustomlemma{#1}\innercustomlemma}
+  {\endinnercustomlemma}
+\newtheorem{ctheorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{ccorollary}[ctheorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{cconcept}{Concept}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{thm}[theorem]{Theorem}
+\newtheorem{property}[theorem]{Property}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem*{assumption*}{Assumption}
+\newtheorem*{question*}{Question}
+
+
+
+\newtheorem*{rep@theorem}{\rep@title}
+\newcommand{\newreptheorem}[2]{%
+\newenvironment{rep#1}[1]{%
+ \def\rep@title{#2 \ref{##1}}%
+ \begin{rep@theorem}}%
+ {\end{rep@theorem}}}
+
+
+\newreptheorem{theorem}{Theorem}
+\newreptheorem{lemma}{Lemma}
+\newreptheorem{proposition}{Proposition}
+\newreptheorem{claim}{Claim}
+\newreptheorem{definition}{Definition}
+%\newreptheorem{problem}{Problem}
+
+
+%\ifCOLT\else
+\theoremstyle{definition}
+%\fi
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{problem}[theorem]{Problem} %%% added by Zhao
+\newtheorem{param}[theorem]{Parameter}
+\newtheorem*{defn}{Definition}
+\newtheorem*{exmp}{Example}
+
+
+%\ifCOLT\else
+\theoremstyle{remark}
+%\fi
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{note}{Notation}
+\newtheorem{case}{Case}
+\newtheorem*{rem}{Remark}
+\newtheorem*{hnote}{Historical Note}
+\newtheorem*{ack}{Acknowledgments}
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\newenvironment{proofsketch}{\noindent{\it Proof sketch.}\hspace*{1em}}{\qed\bigskip}
+
+%\ifCOLT\else
+\renewcommand{\qedsymbol}{\hfill{\Large $\square$}}
+%\fi
+\newcommand{\bqed}{\hfill{\Large $\blacksquare$}}
+
+
+
+\newcommand{\namedref}[2]{\mbox{\hyperref[#2]{#1~\ref*{#2}}}}
+
+\newcommand{\chapterref}[1]{\namedref{Chapter}{#1}}
+\newcommand{\sectionref}[1]{\namedref{Section}{#1}}
+\newcommand{\appendixref}[1]{\namedref{Appendix}{#1}}
+\newcommand{\theoremref}[1]{\namedref{Theorem}{#1}}
+\newcommand{\factref}[1]{\namedref{Fact}{#1}}
+\newcommand{\remarkref}[1]{\namedref{Remark}{#1}}
+\newcommand{\definitionref}[1]{\namedref{Definition}{#1}}
+\newcommand{\figureref}[1]{\namedref{Figure}{#1}}
+\newcommand{\figurerefb}[2]{\mbox{\hyperref[#1]{Figure~\ref*{#1}#2}}}
+\newcommand{\tableref}[1]{\namedref{Table}{#1}}
+\newcommand{\lemmaref}[1]{\namedref{Lemma}{#1}}
+\newcommand{\claimref}[1]{\namedref{Claim}{#1}}
+\newcommand{\propositionref}[1]{\namedref{Proposition}{#1}}
+\newcommand{\corollaryref}[1]{\namedref{Corollary}{#1}}
+\newcommand{\constructionref}[1]{\namedref{Construction}{#1}}
+\newcommand{\itemref}[1]{\namedref{Item}{#1}}
+\newcommand{\propertyref}[1]{\namedref{Property}{#1}}
+\newcommand{\protocolref}[1]{\namedref{Protocol}{#1}}
+\newcommand{\algorithmref}[1]{\namedref{Algorithm}{#1}}
+\newcommand{\assumptionref}[1]{\namedref{Assumption}{#1}}
+\newcommand{\conceptref}[1]{\namedref{Concept}{#1}}
+\newcommand{\stepref}[1]{\namedref{Step}{#1}}
+\newcommand{\paramref}[1]{\namedref{Parameter}{#1}}
+\newcommand{\footnoteref}[1]{\namedref{Footnote}{#1}}
+\newcommand{\equationref}[1]{\mbox{\hyperref[#1]{(\ref*{#1})}}}
+\renewcommand{\eqref}{\equationref}
+%\newcommand{\equationref}[1]{\namedref{Equation}{#1}}
+\newcommand{\exampleref}[1]{\namedref{Example}{#1}}
+\newcommand{\plineref}[1]{\namedref{Line}{#1}}
+
+
+\newcommand{\var}{\mathbf{Var}}
+\newcommand{\new}{{(\mathsf{new})}}
+
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+\newcommand{\argmin}{\operatornamewithlimits{arg\,min}}
+\DeclareMathOperator*{\sign}{sign}
+
+\makeatletter
+% LeftRightArrow
+\newcommand\xLongLeftRightArrow[2][]%
+  {\ext@arrow 0099{\LongLeftRightArrowfill@}{#1}{#2}}
+\def\LongLeftRightArrowfill@
+  {\arrowfill@\Leftarrow\Relbar\Rightarrow}
+% Rightarrow
+\newcommand\xLongRightArrow[2][]%
+  {\ext@arrow 0099{\LongRightArrowfill@}{#1}{#2}}
+\def\LongRightArrowfill@
+  {\arrowfill@\Relbar\Relbar\Rightarrow}
+\makeatother
+
+
+% defeq
+\iflong
+\newcommand{\defeq}{\stackrel{\mathrm{\scriptscriptstyle def}}{=}}
+\newcommand{\defem}[1]{\textsf{#1}}
+\else
+\newcommand{\defeq}{:=}
+\newcommand{\defem}[1]{\emph{\textsf{\small #1}}}
+\fi
+
+% paragraph headings
+\newcommand{\loss}{\mathbf{Obj}}
+\newcommand{\lossh}{\tilde{\mathbf{Obj}}}
+\newcommand{\lloss}{\mathbf{Loss}}
+\newcommand{\llossh}{\tilde{\mathbf{Loss}}}
+\newcommand{\xE}{{\mathsf{xE}}}
+\newcommand{\CE}{{\mathsf{CE}}}
+\newcommand{\reg}{\mathbf{Reg}}
+\renewcommand{\bar}{\overline}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+\renewcommand{\emptyset}{\varnothing}
+
+\newcommand{\da}{\text{\ding{172}}\xspace}
+\newcommand{\db}{\text{\ding{173}}\xspace}
+\newcommand{\dc}{\text{\ding{174}}\xspace}
+\newcommand{\dd}{\text{\ding{175}}\xspace}
+\newcommand{\de}{\text{\ding{176}}\xspace}
+\newcommand{\df}{\text{\ding{177}}\xspace}
+\newcommand{\dg}{\text{\ding{178}}\xspace}
+
+\newcommand{\tW}{\tilde{W}}
+\newcommand{\SUM}{\mathbf{Sum}}
+\newcommand{\SYM}{\mathbf{Sym}}
+\newcommand{\Fstar}{G^\star}
+\newcommand{\tA}{\tilde{A}}
+\newcommand{\tw}{\tilde{w}}
+\newcommand{\ta}{\tilde{a}}
+\newcommand{\tg}{\tilde{g}}
+\newcommand{\tD}{\tilde{D}}
+
+\newcommand{\Ws}{W^\divideontimes}
+\newcommand{\ws}{w^\divideontimes}
+
+%\newcommand{\bWz}{{\bW^{(0)}}}
+%\newcommand{\bVz}{{\bV^{(0)}}}
+%\renewcommand{\star}{\divideontimes}
+\newcommand{\bWbar}{\breve{\bW}}
+\newcommand{\bWhat}{\bar{\bar{\bW}}}
+\newcommand{\bWp}{\bW'}
+\newcommand{\bWg}{\bW^\star}
+\newcommand{\kappap}{\tilde{\kappa}}
+\newcommand{\kb}{\bar{k}}
+\newcommand{\Bb}{\bar{B}}
+\newcommand{\bVg}{\bV^\star}
+\newcommand{\bVgg}{\bV^{\star,w}}
+\newcommand{\bDp}{\bD'}
+\newcommand{\bDpp}{\bD''}
+\newcommand{\bDz}{\tilde{\bD}}
+\newcommand{\bDbar}{\breve{\bD}}
+\newcommand{\bDs}{\bD^{\mathsf{0/1}}}
+\newcommand{\hp}{h'}
+\newcommand{\hz}{\tilde{h}}
+\renewcommand{\hbar}{\breve{h}}
+\newcommand{\gp}{g'}
+\newcommand{\gz}{g^{(0)}}
+\newcommand{\ghat}{\hat{g}}
+\newcommand{\gbar}{\breve{g}}
+\newcommand{\hhat}{\hat{h}}
+\newcommand{\lhat}{\hat{\loss}}
+\newcommand{\lbar}{\breve{\loss}}
+\newcommand{\done}{\mathds{1}}
+\newcommand{\II}{\mathds{1}}
+\newcommand{\tauS}{\tau_\triangledown}
+\newcommand{\xs}{x^\star}
+\newcommand{\ys}{y^\star}
+\newcommand{\dx}{{d_x}}
+\newcommand{\vepss}{\veps_{\mathsf{s}}}
+\newcommand{\vepsx}{\veps_x}
+\newcommand{\vepsc}{\veps_c}
+\newcommand{\vepse}{\veps_e}
+\newcommand{\complexity}{\mathfrak{C}}
+\newcommand{\complexitys}{\mathfrak{C}_\mathfrak{s}}
+\newcommand{\complexityE}{\mathfrak{C}_\veps}
+\newcommand{\complexityalpha}{\mathfrak{C}_\alpha}
+\newcommand{\complexitytalpha}{\mathfrak{C}_{\tilde{\alpha}}}
+\newcommand{\obj}{\mathsf{Obj}}
+
+\newcommand{\TauZeroBound}{\rhob^{100}}
+\newcommand{\rhob}{\varrho}
+\newcommand{\rhobVal}{n L d \delta^{-1} \log (m/\veps)}
+
+\newcommand{\veps}{\varepsilon}
+\newcommand{\GS}{\mathsf{GS}}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\sgn}{\mathsf{sgn}}
+\newcommand{\lmax}{\lambda_{\max}}
+\newcommand{\lmin}{\lambda_{\min}}
+\newcommand{\Va}{\mathcal{V}}
+
+\newcommand{\out}{\mathsf{out}}
+\newcommand{\outK}{\mathfrak{K}}
+\newcommand{\outF}{\mathfrak{F}}
+\newcommand{\outa}{\mathsf{out}_1}
+\newcommand{\Lg}{\mathfrak{L}_\cG}
+\newcommand{\Bf}{\mathfrak{B}_\cF}
+\newcommand{\Bg}{\mathfrak{B}_\cG}
+\newcommand{\Bfg}{\mathfrak{B}_{\cF\circ \cG}}
+\newcommand{\az}{a}
+\newcommand{\bz}{b}
+\newcommand{\ReLU}{\sigma}
+
+
+
+\newcommand{\nbr}[1]{{\left\| {#1} \right\|}}
+
+\renewcommand{\E}{\operatornamewithlimits{\mathbb{E}}}
+\renewcommand{\Pr}{\operatornamewithlimits{\mathbf{Pr}}}
+\newcommand{\Lap}{\mathcal{L}}
+\newcommand{\Ncal}{\mathcal{N}}
+\newcommand{\Real}{\mathbb{R}}
+%\newcommand{\dd}{\rm{d}}
+%\newcommand{\PP}{\rm{P}}
+\newcommand{\set}[1]{\mathcal{#1}}
+\newcommand{\NumContext}{N}
+%\newcommand{\diag}{\textsf{diag}}
+
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cF}{\mathcal{F}}
+%\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cI}{\mathcal{I}}
+
+\newcommand{\N}{\mathcal{N}}
+
+\newcommand{\matrixstyle}{\mathbf}
+\newcommand{\bF}{\matrixstyle{F}}
+\newcommand{\bE}{\matrixstyle{E}}
+\newcommand{\bC}{\matrixstyle{C}}
+\newcommand{\bN}{\matrixstyle{N}}
+\newcommand{\bM}{\matrixstyle{M}}
+\newcommand{\bA}{\matrixstyle{A}}
+\newcommand{\bAg}{\matrixstyle{A}^\star}
+\newcommand{\bB}{\matrixstyle{B}}
+\newcommand{\bX}{\matrixstyle{X}}
+\newcommand{\bY}{\matrixstyle{Y}}
+\newcommand{\bU}{\matrixstyle{U}}
+\newcommand{\bu}{\matrixstyle{u}}
+\newcommand{\bV}{\matrixstyle{V}}
+\newcommand{\bL}{\matrixstyle{L}}
+\newcommand{\btV}{\widetilde{\matrixstyle{V}}}
+\newcommand{\bG}{\matrixstyle{G}}
+\newcommand{\bH}{\matrixstyle{H}}
+\newcommand{\bO}{\matrixstyle{O}}
+\newcommand{\bP}{\matrixstyle{P}}
+\newcommand{\bQ}{\matrixstyle{Q}}
+\newcommand{\btE}{\widetilde{\matrixstyle{E}}}
+\newcommand{\bD}{\matrixstyle{D}}
+\newcommand{\bJ}{\matrixstyle{J}}
+\newcommand{\bK}{\matrixstyle{K}}
+\newcommand{\bR}{\matrixstyle{R}}
+\newcommand{\btR}{\matrixstyle{\widetilde{R}}}
+\newcommand{\btQ}{\matrixstyle{\widetilde{Q}}}
+\newcommand{\bS}{\matrixstyle{S}}
+\newcommand{\bI}{\matrixstyle{I}}
+\newcommand{\btM}{\widetilde{\matrixstyle{M}}}
+\newcommand{\bT}{\matrixstyle{T}}
+\newcommand{\bTb}{\matrixstyle{T}_{\bot}}
+\newcommand{\btXb}{\widetilde{\matrixstyle{X}}_{\bot}}
+\newcommand{\btX}{\widetilde{\matrixstyle{X}}}
+\newcommand{\bbX}{\overline{\matrixstyle{X}}}
+\newcommand{\btY}{\widetilde{\matrixstyle{Y}}}
+\newcommand{\btYb}{\widetilde{\matrixstyle{Y}}_{\bot}}
+\newcommand{\bbY}{\overline{\matrixstyle{Y}}}
+\newcommand{\btSigma}{\widetilde{\matrixstyle{\Sigma}}}
+\newcommand{\bZ}{\matrixstyle{Z}}
+\newcommand{\bW}{\matrixstyle{W}}
+\newcommand{\bOne}{\matrixstyle{1}}
+
+\newcommand{\ckappa}{\tau}
+\newcommand{\bSigma}{\matrixstyle{\Sigma}}
+\newcommand{\bDelta}{\matrixstyle{\Delta}}
+%\newcommand{\bMg}{\matrixstyle{M}^*}
+\newcommand{\bNoise}{\matrixstyle{N}}
+\newcommand{\bGamma}{\matrixstyle{\Gamma}}
+\newcommand{\bLambda}{\matrixstyle{\Lambda}}
+
+\newcommand{\tY}{\widetilde{\matrixstyle{Y}}}
+
+\newcommand{\bbSigma}{\overline{\matrixstyle{\Sigma}}}
+
+\newcommand{\dmaxp}{D_2}
+\newcommand{\dmax}{D_1}
+\newcommand{\sP}{\set{P}}
+
+%\newcommand{\Us}{(\bU^*)}
+%\newcommand{\Vs}{(\bV^*)}
+
+\newcommand{\bUb}{\matrixstyle{U}_{\bot}}
+\newcommand{\bVb}{\matrixstyle{V}_{\bot}}
+\newcommand{\bXb}{\matrixstyle{X}_{\bot}}
+\newcommand{\bYb}{\matrixstyle{Y}_{\bot}}
+\newcommand{\bOneb}{\matrixstyle{1}_{\bot}}
+
+
+\newcommand{\lambdal}{\underline{\lambda}}
+\newcommand{\lambdau}{\overline{\lambda}}
+\newcommand{\sigmas}{{\sigma}_s}
+\newcommand{\sigmal}{{\sigma}_l}
+\newcommand{\sigmat}{\tilde{\sigma}}
+
+
+\newcommand{\cds}{\textsf{dist}_c}
+
+\newcommand{\leftll}{\left\|}
+\newcommand{\rightll}{\right\|}
+%\newcommand{\hp}{\odot}
+%\newcommand{\ortho}{\textsf{O}}
+\newcommand{\QR}{\textsf{QR}}
+\newcommand{\SVD}{\textsf{SVD}}
+%\newcommand{\rank}{k}
+\newcommand{\trace}{\bold{Tr}}
+\newcommand{\tr}{\trace}
+\newcommand{\diag}{\bold{diag}}
+\newcommand{\Tr}{\trace}
+\newcommand{\Rad}{\mathfrak{R}}
+\newcommand{\OPT}{\mathsf{OPT}}
+
+\newcommand{\AlgRInitial}{\textsf{RandInitial}}
+\newcommand{\AlgInitial}{\textsf{SVDInitial}}
+\newcommand{\AlgWhitening}{\textsf{Whitening}}
+\newcommand{\AlgMain}{\textsf{Alt}}
+\newcommand{\AlgClip}{\textsf{Clip}}
+
+\newcommand{\incoherentpartial}{\rho}
+\newcommand{\incoherentfull}{\mu}
+\newcommand{\valupdate}{\textsf{val}}
+\newcommand{\valdelta}{\textsf{c}}
+
+\newcommand{\subs}{\text{SS}}
+\newcommand{\subsr}{\text{RSS}}
+\newcommand{\subsc}{\text{CSS}}
+
+\newcommand{\tx}{\tilde{x}} % the decoding before threshold
+\newcommand{\xp}{{x'}} % the decoding for the shadow sample
+\newcommand{\yp}{{y'}} % the shadow sample
+\newcommand{\thres}[2]{\phi_{#1}\rbr{#2}} % the threshold
+\newcommand{\ntopic}{K}
+\newcommand{\nword}{n}
+\newcommand{\damp}{R}
+\newcommand{\ntdoc}{s} % number of topics in each document
+\newcommand{\rbr}[1]{\left(#1\right)} % brackets
+\newcommand{\sbr}[1]{\left[#1\right]}
+\newcommand{\cbr}[1]{\left\{#1\right\}}
+\newcommand{\abr}[1]{\left|#1\right|}
+\newcommand{\replace}{\text{Rep}}
+\newcommand{\postime}[2]{{#1}^{(#2)}_{+}}
+\newcommand{\negtime}[2]{{#1}^{(#2)}_{-}}
+\newcommand{\titime}[2]{{#1}^{(#2)}}
+
+\newcommand{\pt}[1]{\postime{#1}{t}}
+\newcommand{\nt}[1]{\negtime{#1}{t}}
+\newcommand{\ti}[1]{\titime{#1}{t}}
+
+\newcommand{\pto}[1]{\postime{#1}{t+1}}
+\newcommand{\nto}[1]{\negtime{#1}{t+1}}
+\newcommand{\tio}[1]{\titime{#1}{t+1}}
+\newcommand{\sym}[1]{\left\|{#1}\right\|_{\mbox{sym}}}
+
+\newcommand{\xmin}{x_{\textrm{min}}} 
+\newcommand{\xexpc}{c_0} 
+\newcommand{\corr}{c_1}
+\newcommand{\minprob}{c_3}
+\newcommand{\eqnref}[1]{(\ref{#1})} 
+\newcommand{\sigmac}{C}
+\newcommand{\sigmamax}{\Sigma_{\max}}
+
+\newcommand{\AlgDecode}{\textsf{Decode}}
+
+\newcommand{\AlgRen}{\textsf{Renormalization}}
+\newcommand{\valupE}{c}
+\newcommand{\correlation}{\mathcal{C}}
+\newcommand{\corre}{\mathcal{C}}
+
+
+
+\DeclareMathOperator*{\prox}{prox}
+
+
+\usepackage{lineno}
+\def\linenumberfont{\normalfont\small}
+
+\newcommand*\samethanks[1][\value{footnote}]{\footnotemark[#1]}
+
+
+\begin{document}
+
+
+
+\title{Convex Optimization: Homework 4}
+
+
+\date{}
+
+
+\newcommand{\authorname}[1]{\makebox[4.9cm][c]{#1}}
+\author{
+\authorname{Instructor: Yuanzhi Li} \\
+Carnegie Mellon University
+\\
+Due: May 8th, 2020 [No Extensions]
+}
+
+
+\maketitle
+
+This homework consists of many conceptual questions. To obtain an answer, you are not allowed to use the \emph{exact} sentences from the slides, but you can rephrase them or use the exact sentences from the course videos. Please cite lecture slides and videos appropriately.
+
+\section{Over-parameterization (30 points + 20 bonus points)}
+
+\subsection{Intuition (10 points) [Cinnie]}
+Explain the intuition behind how over-parameterization can make a non-convex optimization problem in machine learning easier to solve.
+
+\subsection{Investigation (20 points + 20 bonus points) [Stefani]}
+
+This is a coding question: For $x \in \mathbb{R}^d$, consider the true labeling function $y(x) = \sum_{i = 1}^d \ReLU(x_i)$, where $\ReLU$ is the ReLU activation. 
+
+
+Now, suppose you want to learn it using a model $h(W, x) = \sum_{i \in [\mathbf{m}]} \ReLU(\langle w_i, x \rangle)$, where $W = \{ w_i \}_{i \in [d]}$ are trainable parameters. Consider the following $\ell_2$ loss:
+$$f(W) = \E_{x \sim \mathcal{N}(0, I)}[ (y(x) - h(W, x))^2].$$
+
+Write code to minimize $f(W)$ using (mini-batch) stochastic gradient descent, starting from a random initialization where each $w_i$ i.i.d. $\sim \mathcal{N}(0, \frac{1}{d} I)$. 
+
+Consider two settings:  \begin{enumerate}
+    \item proper-parameterization: $d = m = 20$, and 
+    \item  over-parameterization:  $d = 20, m = 200$.
+\end{enumerate}
+
+Plot the function value $f(W)$ (you can calculate it approximately by randomly sampling $x$) v.s. number of iterations. You can pick your own mini-batch size. 
+
+\textbf{Bonus (20 points): } Study this problem for a larger set of $m$-values. Try to understand how the problem changes as a function of $m$ (there's no single ``right answer''). Provide 1 plot as a function of $m$ ($m$ on the $x$-axis, and something else - your choice - on the $y$-axis) with an explanation of the plot and how it reflects your improved understanding of the problem post-investigation.
+
+
+\section{Large learning rate (10 points) [Vishwak]}
+
+Explain the most important goal of using an initial large learning rate when training a neural network for image classification. What is the underlying mechanism? 
+
+
+\section{Adversarial training (10 points) [Vishwak]}
+
+In the sparse coding example shown in lecture 24, explain how a neural network with ReLU activation can learn the target function, which is robust to $\ell_2$ norm bounded perturbations with radius $\tau = \frac{1}{\sqrt{d}}$. Explain why a linear function can not do it. 
+
+
+\section{Batch normalization: (10 points) [Vishwak]}
+Consider the batch normalization for ridge regression example shown in the slides. The objective is given by:
+$$f(w) = \left\| w^* - \frac{w}{\| w\|_2} \right\|_2^2 + \lambda \|w \|_2^2.$$
+
+Consider the case where $\lambda > 0$ is a fixed constant. $w \in \mathbb{R}^d$ and $\|w^* \|_2 = 1$.
+
+You want to show that the geometry of the function $f$ with batch normalization is pretty bad:
+
+(1) Show that $f(w) \to f^*$ for $w = \epsilon w^*$ as $\epsilon \to 0^+$. Here we define $f^* = \inf_w f(w)$.
+
+(2) Show that around $w = 0$, the function $f$ is not Lipschitz (gradient does not have a bounded $\ell_2$ norm), nor smooth (Hessian matrix does not have a bounded spectral norm).
+
+\section{Min-max optimization (35 points)}
+
+\subsection{Necessity of second-order local optimal condition (15 points) [Jerry]}
+
+Consider $f(x, y) = 0.2xy - \cos(y)$ defined over $x \in [-1, 1]$, $y \in [-2\pi, 2\pi]$. Find the the global min-max optimal solutions $(x^*, y^*)$, and explain why they are not (second order) local min-max optimal solutions. 
+
+
+\subsection{Generative Adversarial Networks! (20 points) [Cinnie]}
+
+Use the code at \href{https://colab.research.google.com/drive/1EtjBGFlnHoXRbRzcx-Wc8Q9NZ-MhXy-A}{this link}. Train it using \begin{enumerate}
+    \item The original setup: the learning rate is $0.0002$ for both discriminator and generator, batch size is $100$.
+    \item Discriminator too powerful: The generator's learning rate is decrease to $0.0001$ and the discriminator's is increased to $0.001$.
+    \item  Low noise: The batch size is increased to $1000$ (the learning rates are still $0.0002$) and run for $T=45$ epochs. 
+\end{enumerate} 
+
+
+Report output of the generator after $T = 20$ epochs (except the 3rd experiment) (show some pictures). Use the principles showed in class to explain your findings. 
+
+Note: You can use Google Colab to run your experiments.
+
+\end{document} 
+
+
+
